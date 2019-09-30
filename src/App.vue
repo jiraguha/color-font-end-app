@@ -1,31 +1,30 @@
-<template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <colored-cube />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
-</template>
-
 <script>
 import HelloWorld from "./components/HelloWorld.vue";
 import ColoredCube from "./components/ColoredCube";
+import NotFound from "./components/NotFound";
+import Colored from "./components/Colored";
 
+const routes = {
+  "/": HelloWorld,
+  "/colored-cube": ColoredCube,
+  "/colored": Colored
+};
 export default {
   name: "app",
-  components: {
-    HelloWorld,
-    ColoredCube
+  data() {
+    return {
+      currentRoute: window.location.pathname
+    };
+  },
+  computed: {
+    ViewComponent() {
+      return routes[this.currentRoute] || NotFound;
+    }
+  },
+  render(h) {
+    return h(this.ViewComponent);
   }
 };
 </script>
 
-<style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>
