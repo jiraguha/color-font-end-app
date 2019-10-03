@@ -95,7 +95,7 @@
             },
             requestStream: function () {
                 // eslint-disable-next-line no-console
-                console.log("Opening the tpc connection");
+                console.log("Requesting a stream");
                 this.socket.requestStream({data: {latency: this.latency}}).subscribe({
                     // eslint-disable-next-line no-console
                     onComplete: () => {
@@ -112,7 +112,6 @@
                         console.log(payload.data);
                         this.items.push(payload.data);
                         this.codes.push(payload.data.hexCode);
-
                     },
 
                     onSubscribe: subscription => {
@@ -158,6 +157,14 @@
             return `RGBA(${r},${g},${b},${finalAlpha})`;
         }
         return null;
+    }
+    function sleep(milliseconds) {
+        var start = new Date().getTime();
+        for (var i = 0; i < 1e7; i++) {
+            if ((new Date().getTime() - start) > milliseconds){
+                break;
+            }
+        }
     }
 </script>
 
