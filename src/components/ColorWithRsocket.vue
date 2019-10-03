@@ -93,6 +93,7 @@
             randomIndex: function () {
                 return 0;
             },
+            // Choose Integration model
             requestStream: function () {
                 // eslint-disable-next-line no-console
                 console.log("Requesting a stream");
@@ -108,13 +109,14 @@
                         // addErrorMessage("Connection has been closed due to ", error);
                     },
                     onNext: payload => {
+                        // Processor
                         // eslint-disable-next-line no-console
                         console.log(payload.data);
                         this.items.push(payload.data);
                         this.codes.push(payload.data.hexCode);
                     },
-
                     onSubscribe: subscription => {
+                        //Async pull
                         subscription.request(parseInt(this.requestn));
                     }
                 });
